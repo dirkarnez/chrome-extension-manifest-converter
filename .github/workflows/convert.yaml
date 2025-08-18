@@ -36,7 +36,7 @@ jobs:
           %USERPROFILE%\Downloads\python-3.10.8-amd64-portable\Scripts;
           cd /d "extension-manifest-converter" &&^
           python.exe emc.py "${{ github.workspace }}\${{ env.target_repo }}" &&^
-          cd /d "${{ github.workspace }}\${{ env.target_repo }}" &&^
+          cd /d "${{ github.workspace }}\${{ env.target_repo }}_delete" &&^
           rmdir /s /q .git && ^
           cd /d "${{ github.workspace }}" &&^
           xcopy /E /H /Y /C "${{ env.target_repo }}_delete\*" "${{ env.target_repo }}" &&^
