@@ -1,2 +1,28 @@
-git clone https://github.com/GoogleChromeLabs/extension-manifest-converter
+name: chrome-extension-manifest-converter-actions-workflow
+# on:
+#   push
+  
+jobs:
+  build:
+    name: Convert
+    runs-on: windows-latest
+    env:
+      target_repo: dirkarnez/
+    steps:
+      - shell: cmd
+        run: | 
+          git config --global user.name "dirkarnez" && ^
+          git config --global user.email "smalldirkalex@gmail.com" && ^
+          git clone https://dirkarnez:${{ secrets.GH_PAT }}@github.com/dirkarnez/${{ env.target_repo }}.git && ^
+          cd "${{ env.target_repo }}" && ^
+          rmdir /s /q .git && ^
+          git init && ^
+          git remote add origin https://dirkarnez:${{ secrets.GH_PAT }}@github.com/dirkarnez/${{ env.target_repo }}.git && ^
+          git add * && ^
+          git commit -m "- init" && ^
+          git branch -M main && ^
+          git push --force -u origin main
+
+
+          git clone https://github.com/GoogleChromeLabs/extension-manifest-converter
 python3 emc.py dir/path/
