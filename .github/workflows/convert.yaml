@@ -35,7 +35,9 @@ jobs:
           %USERPROFILE%\Downloads\python-3.10.8-amd64-portable\Scripts;
           cd /d "extension-manifest-converter" &&^
           python.exe emc.py "${{ github.workspace }}\${{ env.target_repo }}" &&^
-          echo done
+          cd /d "${{ github.workspace }}" &&^
+          xcopy /E /H /Y /C "${{ env.target_repo }}_delete\*" "${{ env.target_repo }}" &&^
+          echo done 
           
       - uses: EndBug/add-and-commit@v9
         with:
